@@ -63,7 +63,7 @@ bool Organism::collision(Organism* organism, int dX, int dY) {
 	if (Plant* p = dynamic_cast<Plant*>(organism)) {
 
 		strength += p->boost();
-		if (p->isPoisonous()) {
+		if (p->isPoisonous() && !getSpecial()) {
 
 			eventInfo = icon;
 			eventInfo += " has been poisoned";
@@ -75,7 +75,7 @@ bool Organism::collision(Organism* organism, int dX, int dY) {
 	}
 	if (Animal* a = dynamic_cast<Animal*>(organism)) {
 
-		if (a->escape(dX, dY)) {
+		if (a->escape(this, dX, dY)) {
 
 			eventInfo = organism->getIcon();
 			eventInfo += " has escaped";
@@ -142,4 +142,8 @@ std::string Organism::getFlatOrganism() {
 	organismFlat += std::to_string(posY);
 
 	return organismFlat;
+}
+
+bool Organism::getSpecial() {
+	return false;
 }

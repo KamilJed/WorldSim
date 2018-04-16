@@ -10,6 +10,6 @@ public:
 	virtual void draw();
 	virtual bool action();
 	virtual bool collision(Organism*, int, int);
-	virtual bool escape(int, int);
+	virtual bool escape(Organism*, int, int);
 };
 

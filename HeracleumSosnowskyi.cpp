@@ -37,7 +37,8 @@ bool HeracleumSosnowskyi::action() {
 
 				Organism* organism = world->isEmpty(posX + j, posY + i);
 
-				if (dynamic_cast<Animal*>(organism)) world->erase(organism);
+				if (dynamic_cast<Animal*>(organism))
+					if(!organism->getSpecial())world->erase(organism);
 			}
 		}
 	}

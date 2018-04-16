@@ -20,18 +20,19 @@
 #include <fstream>
 #include <sstream>
 
-World::World(int sizeX, int sizeY){
+World::World(int sizeX = 20, int sizeY = 20){
 
 	this->worldSizeX = sizeX;
 	this->worldSizeY = sizeY;
+	if (sizeX <= 0 || sizeY <= 0 || sizeX > 50 || sizeY > 20) {
+		std::string exception = "Invalid board size!";
+		throw exception;
+	}
 	this->worldMap = new Organism**[sizeY];
 	isHuman = false;
 	turn = 0;
 
 	for (int i = 0; i < sizeY; i++)worldMap[i] = new Organism*[sizeX]();
-
-	//addOrganism(new Antelope(1, 1, *this));
-	//addOrganism(new Grass(2, 2, *this));
 
 	for (int i = 0; i < worldSizeY; i++) {
 
@@ -39,11 +40,11 @@ World::World(int sizeX, int sizeY){
 
 			int character = rand() % 40;
 
-			/*if (character == 0) addOrganism(new Sheep(j, i, *this));
+			if (character == 0) addOrganism(new Sheep(j, i, *this));
 			
 			else if (character == 1) addOrganism(new Wolf(j, i, *this));
 			
-			else if (character == 2) addOrganism(new Grass(j, i, *this));*/
+			else if (character == 2) addOrganism(new Grass(j, i, *this));
 			
 			if (character == 3 && isHuman == false) {
 
@@ -51,8 +52,8 @@ World::World(int sizeX, int sizeY){
 				isHuman = true;
 				player = dynamic_cast<Human*>(worldMap[i][j]);
 			}
-			else if (character == 1) addOrganism(new Wolf(j, i, *this));
-			/*else if (character == 4) addOrganism(new Dandelion(j, i, *this));
+			
+			else if (character == 4) addOrganism(new Dandelion(j, i, *this));
 			
 			else if (character == 5) addOrganism(new Fox(j, i, *this));
 
@@ -64,7 +65,7 @@ World::World(int sizeX, int sizeY){
 
 			else if (character == 9) addOrganism(new HeracleumSosnowskyi(j, i, *this));
 
-			else if (character == 10) addOrganism(new Antelope(j, i, *this));*/
+			else if (character == 10) addOrganism(new Antelope(j, i, *this));
 		}
 	}
 }
@@ -202,10 +203,11 @@ int World::getZn() {
 	return zn;
 }
 
-void World::setHuman() {
+void World::setHuman(Human* human) {
 
 	isHuman = !isHuman;
 	if (!isHuman)player = nullptr;
+	else player = human;
 }
 
 bool World::ifHuman() {
@@ -315,34 +317,31 @@ void World::loadWorld() {
 
 		loadFile.close();
 	}
+	else {
+		int row, col;
+		getmaxyx(stdscr, row, col);
+		clear();
+		mvprintw(row / 2, (col - strlen("Wrong file.")) / 2, "%s", "Wrong file.");
+		getch();
+	}
 
 }
 
 std::string World::getFileName() {
 
 	std::string saveDest;
-	char buffor;
+	char buffor[256];
+	int row, col;
+	getmaxyx(stdscr, row, col);
 
-	do {
+	clear();
+	mvprintw(row / 2, (col - strlen("Type in save file name: ")) / 2, "%s", "Type in save file name: ");
 
-		clear();
-		mvprintw(0, 0, "Type in save file name:");
-		printw(saveDest.c_str());
+	echo();
+	getstr(buffor);
+	noecho();
 
-		buffor = getch();
-
-		if (buffor == BACKSPACE && saveDest.size() > 0) {
-
-			saveDest.pop_back();
-
-			clear();
-			mvprintw(0, 0, "Type in save file name:");
-			printw(saveDest.c_str());
-		}
-		else if ((buffor >= 'a' && buffor <= 'z') || (buffor >= 'A' && buffor <= 'Z') || (buffor >= '0' && buffor <= '9')) saveDest += buffor;
-
-	} while (buffor != ENTER);
-
+	saveDest = buffor;
 
 	return saveDest;
 }
@@ -364,7 +363,7 @@ void World::deflatOrganism(std::string flatOrganism) {
 
 	case 'Y':
 		tempOrg >> special >> turns;
-		addOrganism(new Human(x, y, *this, special, turns, stght));
+		addOrganism(new Human(x, y, *this, turns, special, stght));
 		break;
 
 	case 'm':

@@ -11,7 +11,7 @@ Human::Human(int x, int y, World& world) : Animal(x, y, world)
 	strength = 5;
 	icon = 'Y';
 	turnsRemaining = 0;
-	world.setHuman();
+	world.setHuman(this);
 }
 
 Human::Human(int x, int y, World& world, int turns, bool spec, int strength) : Animal(x, y, world, strength) {
@@ -21,13 +21,13 @@ Human::Human(int x, int y, World& world, int turns, bool spec, int strength) : A
 	icon = 'Y';
 	turnsRemaining = turns;
 	special = spec;
-	world.setHuman();
+	world.setHuman(this);
 }
 
 
 Human::~Human()
 {
-	world->setHuman();
+	world->setHuman(this);
 }
 
 void Human::draw() {
@@ -144,9 +144,9 @@ std::string Human::getFlatOrganism() {
 	return organismFlat;
 }
 
-bool Human::escape(int dX, int dY) {
+bool Human::escape(Organism* organism, int dX, int dY) {
 
-	if (special) {
+	if (special && organism->getStrength() >= strength) {
 
 		int maxX = world->getSizeX();
 		int maxY = world->getSizeY();
@@ -172,7 +172,7 @@ bool Human::escape(int dX, int dY) {
 
 bool Human::collision(Organism* organism, int dX, int dY) {
 
-	if (special && escape(dX, dY)) return false;
+	if (special && organism->getStrength() > strength && escape(organism, dX, dY)) return false;
 	else return Animal::collision(organism, dX, dY);
 }
 

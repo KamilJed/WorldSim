@@ -9,7 +9,7 @@ public:
 	~Antelope();
 	bool action();
 	Organism* clone(int, int);
-	bool escape(int, int);
+	bool escape(Organism*, int, int);
 	bool collision(Organism*, int, int);
 };
 

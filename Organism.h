@@ -29,5 +29,6 @@ public:
 	virtual Organism* clone(int, int) = 0;
 	virtual bool deflectAttack(Organism*);
 	virtual std::string getFlatOrganism();
+	virtual bool getSpecial();
 };
 

@@ -85,6 +85,6 @@ bool Animal::collision(Organism* organism, int dX, int dY) {
 		else return Organism::collision(organism, dX, dY);
 }
 
-bool Animal::escape(int dX, int dY) {
+bool Animal::escape(Organism* organism, int dX, int dY) {
 	return false;
 }

@@ -15,7 +15,7 @@ public:
 	bool getSpecial();
 	int getTurns();
 	std::string getFlatOrganism();
-	bool escape(int, int);
+	bool escape(Organism*, int, int);
 	bool collision(Organism*, int, int);
 	void abilityControl();
 };

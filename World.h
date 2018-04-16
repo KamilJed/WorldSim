@@ -40,7 +40,7 @@ public:
 	void setInfo(std::string);
 	int getZn();
 	void setZn(int);
-	void setHuman();
+	void setHuman(Human*);
 	bool ifHuman();
 	void addOrganism(Organism*);
 	void includeBabies();

@@ -30,7 +30,7 @@ bool Antelope::action() {
 	else return true;
 }
 
-bool Antelope::escape(int dX, int dY) {
+bool Antelope::escape(Organism* organism, int dX, int dY) {
 
 	if (rand() % 100 <= 50) {
 
@@ -58,6 +58,6 @@ bool Antelope::escape(int dX, int dY) {
 
 bool Antelope::collision(Organism* organism, int dX, int dY) {
 
-	if (icon != organism->getIcon() && escape(dX, dY)) return false;
+	if (icon != organism->getIcon() && escape(organism, dX, dY)) return false;
 	else return Animal::collision(organism, dX, dY);
 }
