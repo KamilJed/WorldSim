@@ -24,7 +24,7 @@ World::World(int sizeX, int sizeY){
 
 	this->worldSizeX = sizeX;
 	this->worldSizeY = sizeY;
-	if (sizeX <= 0 || sizeY <= 0 || sizeX > 50 || sizeY > 20) {
+	if (sizeX <= 0 || sizeY <= 0) {
 		std::string exception = "Invalid board size!";
 		throw exception;
 	}
@@ -219,9 +219,14 @@ int World::getZn() {
 
 void World::setHuman(Human* human) {
 
-	isHuman = !isHuman;
-	if (!isHuman)player = nullptr;
-	else player = human;
+	isHuman = true;
+	player = human;
+}
+
+void World::delHuman() {
+
+	isHuman = false;
+	player = nullptr;
 }
 
 bool World::ifHuman() {
@@ -494,12 +499,16 @@ void World::delMap() {
 
 	if (worldMap != nullptr) {
 
-		for (int i = 0; i < worldSizeY; i++)delete[] worldMap[i];
+		for (int i = 0; i < worldSizeY; i++) {
+
+			for (int j = 0; j < worldSizeX; j++)delete worldMap[i][j];
+
+			delete[] worldMap[i];
+		}
 
 		delete[] worldMap;
 	}
 
-	while (!initiativeQueue.empty())initiativeQueue.pop_back();
-
-	while (!babyList.empty())babyList.pop_back();
+	initiativeQueue.clear();
+	babyList.clear();
 }

@@ -41,6 +41,7 @@ public:
 	int getZn();
 	void setZn(int);
 	void setHuman(Human*);
+	void delHuman();
 	bool ifHuman();
 	void addOrganism(Organism*);
 	void includeBabies();

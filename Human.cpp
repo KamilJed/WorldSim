@@ -27,7 +27,7 @@ Human::Human(int x, int y, World& world, int turns, bool spec, int strength) : A
 
 Human::~Human()
 {
-	world->setHuman(this);
+	world->delHuman();
 }
 
 void Human::draw() {
