@@ -92,6 +92,8 @@ void World::gameInit() {
 
 void World::drawWorld() {
 
+	clear();
+
 	mvprintw(0, 0, "Kamil Jedrzejczak 171660");
 
 	for (int i = 0; i < worldSizeY; i++) {
@@ -110,8 +112,6 @@ void World::drawWorld() {
 }
 
 void World::newTurn() {
-
-	clear();
 
 	turn++;
 
@@ -184,7 +184,6 @@ void World::info() {
 	int rows = getmaxy(stdscr);
 	std::string size = "Organisms: ";
 	size += std::to_string(initiativeQueue.size());
-
 	attron(A_BOLD);
 	if (has_colors() == TRUE)
 	{
@@ -192,6 +191,11 @@ void World::info() {
 		attron(COLOR_PAIR(3));
 		mvprintw(worldSizeY + 1, 0, size.c_str());
 		mvprintw(worldSizeY + 2, 0, raport.c_str());
+		mvprintw(1, worldSizeX + 2, "Y - human");
+		mvprintw(2, worldSizeX + 2, "e/E - special ability(immortality)");
+		mvprintw(3, worldSizeX + 2, "arrows - move");
+		if(isHuman) mvprintw(4, worldSizeX + 2, "Human status: alive");
+		else mvprintw(4, worldSizeX + 2, "Human status: dead");
 		attroff(COLOR_PAIR(3));
 	}
 	else {

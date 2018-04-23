@@ -1,19 +1,5 @@
 ﻿  World.cpp
-c:\users\kamil\source\repos\cyber-owca\cyber-owca\world.cpp(447): warning C4101: 'turns': unreferenced local variable
-c:\users\kamil\source\repos\cyber-owca\cyber-owca\world.cpp(446): warning C4101: 'special': unreferenced local variable
-  Human.cpp
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  cyberowca.cpp
-  Wolf.cpp
-  Sheep.cpp
-  Plant.cpp
-  Organism.cpp
-  HeracleumSosnowskyi.cpp
-  Grass.cpp
-  Fox.cpp
-  Dandelion.cpp
-  Antelope.cpp
-  Animal.cpp
+c:\users\kamil\source\repos\cyber-owca\cyber-owca\world.cpp(451): warning C4101: 'turns': unreferenced local variable
+c:\users\kamil\source\repos\cyber-owca\cyber-owca\world.cpp(450): warning C4101: 'special': unreferenced local variable
   cyber-owca.vcxproj -> C:\Users\Kamil\source\repos\cyber-owca\Debug\cyber-owca.exe
   cyber-owca.vcxproj -> C:\Users\Kamil\source\repos\cyber-owca\Debug\cyber-owca.pdb (Partial PDB)
