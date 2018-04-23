@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Antelope.h"
 #include "World.h"
+#include "Plant.h"
 
 Antelope::Antelope(int x, int y, World& world) : Animal(x, y, world)
 {
@@ -32,6 +33,7 @@ bool Antelope::action() {
 
 bool Antelope::escape(Organism* organism, int dX, int dY) {
 
+	if (dynamic_cast<Plant*>(organism))return false;
 	if (rand() % 100 <= 50) {
 
 		int maxX = world->getSizeX();

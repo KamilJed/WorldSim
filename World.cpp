@@ -20,7 +20,7 @@
 #include <fstream>
 #include <sstream>
 
-World::World(int sizeX = 20, int sizeY = 20){
+World::World(int sizeX, int sizeY){
 
 	this->worldSizeX = sizeX;
 	this->worldSizeY = sizeY;
@@ -74,6 +74,20 @@ World::World(int sizeX = 20, int sizeY = 20){
 World::~World(){
 
 	delMap();
+}
+
+void World::gameInit() {
+
+	raport = "Press any button to start.";
+	drawWorld();
+	zn = getch();
+	while (zn != ESC) {
+
+		newTurn();
+		if (!isHuman) zn = getch();
+		if (zn == 's' || zn == 'S')	saveWorld();
+		else if (zn == 'l' || zn == 'L') loadWorld();
+	}
 }
 
 void World::drawWorld() {
@@ -270,6 +284,10 @@ void World::saveWorld() {
 		}
 
 		saveFile.close();
+		raport = "Game saved " + saveDest + " Press any button";
+		clear();
+		drawWorld();
+		getch();
 	}
 }
 
@@ -316,6 +334,10 @@ void World::loadWorld() {
 		}
 
 		loadFile.close();
+		raport = "Game loaded " + loadDest + ". Press any button";
+		clear();
+		drawWorld();
+		getch();
 	}
 	else {
 		int row, col;
@@ -422,11 +444,6 @@ void World::deflatBaby(std::string flatOrganism) {
 	tempOrg >> type >> init >> stght >> x >> y;
 
 	switch (type) {
-
-	case 'Y':
-		tempOrg >> special >> turns;
-		addBaby(new Human(x, y, *this, special, turns, stght));
-		break;
 
 	case 'm':
 		addBaby(new Sheep(x, y, *this, stght));

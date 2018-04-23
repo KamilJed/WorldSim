@@ -1,3 +1,5 @@
 ﻿  World.cpp
+c:\users\kamil\source\repos\cyber-owca\cyber-owca\world.cpp(442): warning C4101: 'turns': unreferenced local variable
+c:\users\kamil\source\repos\cyber-owca\cyber-owca\world.cpp(441): warning C4101: 'special': unreferenced local variable
   cyber-owca.vcxproj -> C:\Users\Kamil\source\repos\cyber-owca\Debug\cyber-owca.exe
   cyber-owca.vcxproj -> C:\Users\Kamil\source\repos\cyber-owca\Debug\cyber-owca.pdb (Partial PDB)

@@ -23,10 +23,10 @@ class World
 	bool isHuman;
 	int turn;
 	std::string raport;
-
 public:
 	World(int, int);
 	~World();
+	void gameInit();
 	void newTurn();
 	void drawWorld();
 	Organism *isEmpty(int, int);

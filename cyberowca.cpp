@@ -24,19 +24,7 @@ int main() {
 	noecho();
 	try {
 		World world(x, y);
-		world.setInfo("Press any button to start.");
-		world.drawWorld();
-		world.setZn(getch());
-		while (world.getZn() != ESC) {
-
-			world.newTurn();
-			if (!world.ifHuman()) {
-
-				world.setZn(getch());
-			}
-			if (world.getZn() == 's' || world.getZn() == 'S')world.saveWorld();
-			else if (world.getZn() == 'l' || world.getZn() == 'L')world.loadWorld();
-		}
+		world.gameInit();
 	}
 	catch (std::string error) {
 		mvprintw(row / 2, (col - error.size()) / 2, "%s", error.c_str());
